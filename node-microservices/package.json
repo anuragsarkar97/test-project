@@ -1,0 +1,17 @@
+{
+  "name": "node-microservices",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run build:auth && npm run build:api && npm run build:worker",
+    "build:auth": "cd auth-service && npm install && npm run build",
+    "build:api": "cd api-gateway && npm install && npm run build", 
+    "build:worker": "cd worker-service && npm install && npm run build",
+    "start": "concurrently \"npm run start:auth\" \"npm run start:api\" \"npm run start:worker\"",
+    "start:auth": "cd auth-service && npm start",
+    "start:api": "cd api-gateway && npm start",
+    "start:worker": "cd worker-service && npm start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

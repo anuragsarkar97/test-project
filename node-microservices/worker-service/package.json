@@ -1,0 +1,25 @@
+{
+  "name": "worker-service",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "start": "node dist/worker.js",
+    "dev": "nodemon src/worker.js"
+  },
+  "dependencies": {
+    "bull": "^4.11.0",
+    "redis": "^4.6.0",
+    "lodash": "^4.17.21",
+    "sharp": "^0.32.0",
+    "csv-parser": "^3.0.0",
+    "xml2js": "^0.6.0",
+    "puppeteer": "^20.7.0",
+    "ffmpeg-static": "^5.1.0",
+    "node-cron": "^3.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.0",
+    "nodemon": "^3.0.0"
+  }
+}

@@ -1,0 +1,237 @@
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$accent-color: #e74c3c;
+$background-color: #ecf0f1;
+$text-color: #2c3e50;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.heavy-app {
+  font-family: 'Arial', sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  min-height: 100vh;
+  padding: 20px;
+
+  h1 {
+    text-align: center;
+    color: $primary-color;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+
+    .visualization-panel {
+      @include card-shadow;
+      background: white;
+      padding: 20px;
+      min-height: 400px;
+      
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .charts-panel {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+
+      canvas {
+        @include card-shadow;
+        background: white;
+        padding: 10px;
+        max-width: 100%;
+        height: 300px;
+      }
+    }
+
+    .animated-elements {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+
+      .animated-element {
+        @include card-shadow;
+        @include flex-center;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        color: white;
+        padding: 20px;
+        height: 100px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        &:nth-child(odd) {
+          background: linear-gradient(135deg, $secondary-color, $accent-color);
+        }
+
+        &:nth-child(3n) {
+          background: linear-gradient(135deg, $accent-color, $primary-color);
+        }
+      }
+    }
+  }
+}
+
+// Complex animations
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.data-point {
+  animation: slideIn 0.5s ease-out;
+  
+  &:hover {
+    animation: pulse 1s infinite;
+  }
+}
+
+// Responsive design
+@media (max-width: 1200px) {
+  .heavy-app .container {
+    grid-template-columns: 1fr;
+    
+    .charts-panel {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .heavy-app {
+    padding: 10px;
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .container .animated-elements {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      
+      .animated-element {
+        height: 80px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Complex CSS features
+.visualization-panel {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba($primary-color, 0.1), transparent);
+    animation: rotate 10s linear infinite;
+    pointer-events: none;
+  }
+}
+
+// CSS Grid complex layouts
+.complex-grid {
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "sidebar main aside"
+    "footer footer footer";
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  gap: 20px;
+}
+
+// Advanced selectors and pseudo-elements
+.data-point:nth-child(5n+1) {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+}
+
+.data-point:nth-child(5n+2) {
+  background: linear-gradient(45deg, #45b7d1, #96ceb4);
+}
+
+.data-point:nth-child(5n+3) {
+  background: linear-gradient(45deg, #f9ca24, #f0932b);
+}
+
+.data-point:nth-child(5n+4) {
+  background: linear-gradient(45deg, #eb4d4b, #6c5ce7);
+}
+
+.data-point:nth-child(5n) {
+  background: linear-gradient(45deg, #a29bfe, #fd79a8);
+}
+
+// CSS custom properties
+:root {
+  --primary-hue: 210;
+  --primary-saturation: 70%;
+  --primary-lightness: 50%;
+  --primary-color: hsl(var(--primary-hue), var(--primary-saturation), var(--primary-lightness));
+  --primary-color-light: hsl(var(--primary-hue), var(--primary-saturation), 70%);
+  --primary-color-dark: hsl(var(--primary-hue), var(--primary-saturation), 30%);
+}
+
+// Complex transforms and filters
+.enhanced-element {
+  transform: perspective(1000px) rotateX(15deg) rotateY(15deg);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3)) blur(0.5px);
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.1);
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4)) blur(0px);
+  }
+}
